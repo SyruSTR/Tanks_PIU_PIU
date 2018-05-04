@@ -6,9 +6,13 @@ using UnityEngine.UI;
 public class GameControl : MonoBehaviour {
 
     #region peremenya
+
+    public GameObject[] panel;
+
+    public static float Base_HP = 2;
     public static bool playerDead;
     public static int score;
-    public Transform[] enemySpawn;
+    public Transform[] enemySpawn = new Transform[3];
     public Transform enemySpanw1;
     public Transform enemySpanw2;
     public Transform enemySpanw3;
@@ -22,6 +26,8 @@ public class GameControl : MonoBehaviour {
     #endregion
 
     void Start () {
+        panel[0].SetActive(false);
+        Base_HP = 2;
         enemySpawn = new Transform[3] { enemySpanw1, enemySpanw2, enemySpanw3 };
         maxEnemy = maxEnemy * 3;
         playerDead = false;
@@ -50,8 +56,13 @@ public class GameControl : MonoBehaviour {
     void Update () {
 		if (playerDead)
         {
+            
             playerDead = false;
             Instantiate(player, playerSpawn.position, Quaternion.identity);
+        }
+        if (Base_HP <= 0)
+        {
+            panel[0].SetActive(true);
         }
 	}
 }

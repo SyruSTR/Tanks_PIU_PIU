@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
 
     public int damage = 1;
-
+    public Transform exp;
 
 
     void OnTriggerEnter2D(Collider2D coll)
@@ -13,6 +13,7 @@ public class Bullet : MonoBehaviour {
         if (coll.transform.CompareTag("Wall"))
         {
             Destroy(gameObject);
+            Explosion();
         }
         //if (coll.transform.CompareTag("Block"))
         //{
@@ -26,12 +27,24 @@ public class Bullet : MonoBehaviour {
             EnemyControl enemy = coll.transform.GetComponent<EnemyControl>();
             enemy.HP -= damage;
             Destroy(gameObject);
+            Explosion();
         }
         if (coll.transform.CompareTag("Player"))
         {
             PlayerControler player = coll.transform.GetComponent<PlayerControler>();
             player.HP -= damage;
             Destroy(gameObject);
+            Explosion();
         }
+        if (coll.transform.CompareTag("Base"))
+        {
+            Destroy(gameObject);
+            Explosion();
+            GameControl.Base_HP -= damage;
+        }
+    }
+    void Explosion()
+    {
+        Instantiate(exp, this.transform.position, Quaternion.identity);
     }
 }
