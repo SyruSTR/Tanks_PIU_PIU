@@ -290,20 +290,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Unity.PackageManagerUI.Editor.csproj">
-      <Project>{6877705C-FBD9-0C4F-5AFB-6FB431E5D39D}</Project>
-      <Name>Unity.PackageManagerUI.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityEditor.StandardEvents.csproj">
       <Project>{6800202F-4402-D405-F8CB-03DC7BD78B92}</Project>
       <Name>UnityEditor.StandardEvents</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.PackageManagerUI.Editor.csproj">
+      <Project>{6877705C-FBD9-0C4F-5AFB-6FB431E5D39D}</Project>
+      <Name>Unity.PackageManagerUI.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripsts\Bullet.cs" />
     <Compile Include="Assets\Scripsts\EnemyControl.cs" />
+    <Compile Include="Assets\Scripsts\Exp.cs" />
     <Compile Include="Assets\Scripsts\GameControl.cs" />
+    <Compile Include="Assets\Scripsts\HitBar.cs" />
     <Compile Include="Assets\Scripsts\MainMenu.cs" />
+    <Compile Include="Assets\Scripsts\Panels.cs" />
     <Compile Include="Assets\Scripsts\PlayerControler.cs" />
   </ItemGroup>
   <ItemGroup>

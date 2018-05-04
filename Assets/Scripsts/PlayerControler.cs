@@ -39,39 +39,42 @@ public class PlayerControler : MonoBehaviour {
     }
 
     void Update () {
-#region Move
-        if (Input.GetKey(KeyCode.W))
-        {
-            moveDirection = new Vector2(0, 1);
-            rotation = new Vector3(0, 0, 0);
-            _animator.speed = 1;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            moveDirection = new Vector2(0, -1);
-            rotation = new Vector3(0,0, 180);
-            _animator.speed = 1;
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            moveDirection = new Vector2(-1,0);
-            rotation = new Vector3(0, 0, 90);
-            _animator.speed = 1;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            moveDirection = new Vector2(1,0);
-            rotation = new Vector3(0,0,-90);
-            _animator.speed = 1;
-        }
+        #region Move
+        
+        
+            if (Input.GetKey(KeyCode.W) && !GameControl.gameover)
+            {
+                moveDirection = new Vector2(0, 1);
+                rotation = new Vector3(0, 0, 0);
+                _animator.speed = 1;
+            }
+            else if (Input.GetKey(KeyCode.S) && !GameControl.gameover)
+            {
+                moveDirection = new Vector2(0, -1);
+                rotation = new Vector3(0, 0, 180);
+                _animator.speed = 1;
+            }
+            else if (Input.GetKey(KeyCode.A) && !GameControl.gameover)
+            {
+                moveDirection = new Vector2(-1, 0);
+                rotation = new Vector3(0, 0, 90);
+                _animator.speed = 1;
+            }
+            else if (Input.GetKey(KeyCode.D) && !GameControl.gameover)
+            {
+                moveDirection = new Vector2(1, 0);
+                rotation = new Vector3(0, 0, -90);
+                _animator.speed = 1;
+            }
+        
         else
         {
-            moveDirection = new Vector2(0,0);
+            moveDirection = new Vector2(0, 0);
             _animator.speed = 0;
         }
 #endregion
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !GameControl.gameover)
         {
             Rigidbody2D bulletInstance = Instantiate(bullet, gun.position, Quaternion.identity) as Rigidbody2D;
             bulletInstance.velocity = gun.TransformDirection(Vector2.up * bulletspeed);

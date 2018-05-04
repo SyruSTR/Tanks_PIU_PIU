@@ -9,6 +9,7 @@ public class GameControl : MonoBehaviour {
 
     public GameObject[] panel;
 
+    public static bool gameover;
     public static float Base_HP = 2;
     public static bool playerDead;
     public static int score;
@@ -26,6 +27,7 @@ public class GameControl : MonoBehaviour {
     #endregion
 
     void Start () {
+        gameover = false;
         panel[0].SetActive(false);
         Base_HP = 2;
         enemySpawn = new Transform[3] { enemySpanw1, enemySpanw2, enemySpanw3 };
@@ -38,13 +40,15 @@ public class GameControl : MonoBehaviour {
 
     IEnumerator WaitEnemySpawn(float t)
     {
-        foreach (Transform obj in enemySpawn)
-        {
-            maxEnemy--;
-            Instantiate(enemy, obj.position, Quaternion.identity);
+        if (!gameover) {
+            foreach (Transform obj in enemySpawn)
+            {
+                maxEnemy--;
+                Instantiate(enemy, obj.position, Quaternion.identity);
+            }
+            yield return new WaitForSeconds(t);
+            if (maxEnemy > 0) StartCoroutine(WaitEnemySpawn(enemySpanwTime));
         }
-        yield return new WaitForSeconds(t);
-        if (maxEnemy > 0) StartCoroutine(WaitEnemySpawn(enemySpanwTime));
     }
 
     private void OnGUI()
@@ -56,11 +60,14 @@ public class GameControl : MonoBehaviour {
     void Update () {
 		if (playerDead)
         {
-            
-            playerDead = false;
-            Instantiate(player, playerSpawn.position, Quaternion.identity);
+            gameover = true;
         }
         if (Base_HP <= 0)
+        {
+            gameover = true;
+            
+        }
+        if (gameover)
         {
             panel[0].SetActive(true);
         }

@@ -35,15 +35,23 @@ public class EnemyControl : MonoBehaviour {
 
     IEnumerator WaitMove(float t)
     {
-        move = Random.Range(0, 4);
-        yield return new WaitForSeconds(t);
-        StartCoroutine(WaitMove(Random.Range(minMoveTime, maxMoveTime)));
+        if (!GameControl.gameover)
+        {
+            move = Random.Range(0, 4);
+            yield return new WaitForSeconds(t);
+            StartCoroutine(WaitMove(Random.Range(minMoveTime, maxMoveTime)));
+        }
+        else
+            move = 0;
     }
     IEnumerator WaitFire(float t)
     {
-        fire = true;
-        yield return new WaitForSeconds(t);
-        StartCoroutine(WaitFire(Random.Range(minFireTime, maxFireTime)));
+        if (!GameControl.gameover)
+        {
+            fire = true;
+            yield return new WaitForSeconds(t);
+            StartCoroutine(WaitFire(Random.Range(minFireTime, maxFireTime)));
+        }
     }
 
     void FixedUpdate()
@@ -93,8 +101,7 @@ public class EnemyControl : MonoBehaviour {
                 break;
         }
         if (fire)
-        {
-           
+        {           
             fire = false;
             Rigidbody2D bulletInstance = Instantiate(bullet, gun.position, Quaternion.identity) as Rigidbody2D;
             bulletInstance.velocity = gun.TransformDirection(Vector2.right * bulletspeed);
@@ -102,9 +109,7 @@ public class EnemyControl : MonoBehaviour {
         tank.localRotation = Quaternion.Euler(rotation);
         if(HP <= 0)
         {
-            GameControl.score += score;
-            
-            
+            GameControl.score += score;            
             Destroy(gameObject);
         }
     }
