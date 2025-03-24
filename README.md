@@ -1,2 +1,2 @@
 ###GAMEPLAY GIF
-![Alt Text](TANKS_PIU_PIU.gif)
+![Alt Text](/TANKI_PIU_PIU.gif)
